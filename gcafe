@@ -24,8 +24,7 @@ if [ ! -f $menu_pdf ]; then
 fi
 
 
-declare -a days=( "monday" "tuesday" "wednesday" "thursday" "friday" )
-for i in "${days[@]}"; do
-    echo ${i^^}
-    cat tmp/${i}.txt
-done
+day=$(date +%A)
+
+echo ${day^^}
+cat tmp/${day,,}.txt
