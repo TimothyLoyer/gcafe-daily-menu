@@ -15,8 +15,8 @@ height=130
 declare -a days=( "monday" "tuesday" "wednesday" "thursday" "friday" )
 declare -a day_offsets=( ${monday_y} ${tuesday_y} ${wednesday_y} ${thursday_y} ${friday_y} )
 
-menu_pdf=$0
+menu_pdf=$1
 for i in "${!day_offsets[@]}"; do
     output=${days[$i]}
-    pdftotext -x ${offset_x} -y ${day_offsets[$i]} -W ${width} -H ${height} -layout ${menu_pdf} ${output}
+    pdftotext -x ${offset_x} -y ${day_offsets[$i]} -W ${width} -H ${height} -layout ${menu_pdf} tmp/${output}.txt
 done

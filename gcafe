@@ -16,6 +16,9 @@ menu_pdf="tmp/menu-${month}-${day}.pdf"
 
 # get newest menu if not cached
 if [ ! -f $menu_pdf ]; then
+    if [ -f tmp/menu-* ]; then
+        rm ./tmp/menu-*
+    fi
     ./get_menu $menu_pdf
     ./get_days $menu_pdf
 fi
@@ -23,6 +26,6 @@ fi
 
 declare -a days=( "monday" "tuesday" "wednesday" "thursday" "friday" )
 for i in "${days[@]}"; do
-    echo $i^^
-    cat tmp/$i
+    echo ${i^^}
+    cat tmp/${i}.txt
 done
