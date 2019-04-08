@@ -56,7 +56,7 @@ day_menu="tmp/${day,,}.txt"
 
 if [ -f $day_menu ]; then
     menu=$(<$day_menu)
-    printf "${day^} Menu:\n\n\`\`\`\n${menu}\`\`\`"
+    printf "${day^} Menu:\n\`\`\`\n${menu}\`\`\`"
 else
     printf "${day^} menu is not available yet! Please check back in a little while.\n\n"
 fi
