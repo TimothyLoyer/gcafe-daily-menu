@@ -19,12 +19,16 @@ if [ ! -f $menu_pdf ]; then
     if [ -f tmp/menu-* ]; then
         rm ./tmp/menu-*
     fi
-    ./get_menu $menu_pdf
-    ./get_days $menu_pdf
+    ./get_menu $menu_pdf && ./get_days $menu_pdf
 fi
 
 
 day=$(date +%A)
+day_menu="tmp/${day,,}.txt"
 
-echo ${day^^}
-cat tmp/${day,,}.txt
+if [ -f $day_menu ]; then
+    echo ${day^^}
+    cat $day_menu
+else
+    echo "${day^} menu is not available yet! Please check back in a little while."
+fi

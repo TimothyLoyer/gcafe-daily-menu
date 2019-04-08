@@ -21,4 +21,4 @@ if [ $1 ]; then
 fi
 
 menu=$(echo "$url" | sed -E -e "s/\{month\}/${month}/g" -e "s/\{day\}/${day}/g")
-wget "$menu" -qO "$output"
+curl -sf "$menu" -o "$output" || exit 1
