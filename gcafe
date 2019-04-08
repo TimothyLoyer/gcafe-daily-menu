@@ -61,4 +61,4 @@ else
     printf "${day^} menu is not available yet! Please check back in a little while.\n\n"
 fi
 
-printf "For full menu, visit https://flikcafes.compass-usa.com/cafeG/Pages/Menu.aspx?lid=bnb\n"
+printf "\nFor full menu, visit https://flikcafes.compass-usa.com/cafeG/Pages/Menu.aspx?lid=bnb\n"
