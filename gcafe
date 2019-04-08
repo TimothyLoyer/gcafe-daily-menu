@@ -18,25 +18,8 @@ function get_menu {
     # GCafe menu url template
     url="https://flikcafes.compass-usa.com/cafeG/DiningMenus/Menu%20{month}%20{day}.pdf"
 
-    # Set appropriate month and date
-    if [ "$(date +%A)" = "Monday" ]; then
-        month="$(date +%B)"
-        day=$(date +%-d)
-    elif [ $(date +%u) -gt 5 ]; then
-        month="$(date -d-monday +%B)"
-        day=$(date -d-monday +%-d)
-    else
-        month="$(date -dlast-monday +%B)"
-        day=$(date -dlast-monday +%-d)
-    fi
-
-    output="tmp/menu-${month}-${day}.pdf"
-    if [ $1 ]; then
-        output=$1
-    fi
-
     menu=$(echo "$url" | sed -E -e "s/\{month\}/${month}/g" -e "s/\{day\}/${day}/g")
-    curl -sf "$menu" -o "$output" || exit 1
+    curl -sf "$menu" -o "$menu_pdf" || exit 1
 }
 
 function get_days {
@@ -53,7 +36,6 @@ function get_days {
     declare -a days=( "monday" "tuesday" "wednesday" "thursday" "friday" )
     declare -a day_offsets=( ${monday_y} ${tuesday_y} ${wednesday_y} ${thursday_y} ${friday_y} )
 
-    menu_pdf=$1
     for i in "${!day_offsets[@]}"; do
         output="tmp/${days[$i]}.txt"
         pdftotext -x ${offset_x} -y ${day_offsets[$i]} -W ${width} -H ${height} -layout ${menu_pdf} ${output}
@@ -65,7 +47,7 @@ if [ ! -f $menu_pdf ]; then
     if [ -f tmp/menu-* ]; then
         rm ./tmp/menu-*
     fi
-    get_menu $menu_pdf && get_days $menu_pdf
+    get_menu && get_days
 fi
 
 
@@ -73,8 +55,10 @@ day=$(date +%A)
 day_menu="tmp/${day,,}.txt"
 
 if [ -f $day_menu ]; then
-    echo ${day^^}
+    printf "${day^^}\n\n"
     cat $day_menu
 else
-    echo "${day^} menu is not available yet! Please check back in a little while."
+    printf "${day^} menu is not available yet! Please check back in a little while.\n\n"
 fi
+
+printf "For full menu, visit https://flikcafes.compass-usa.com/cafeG/Pages/Menu.aspx?lid=bnb"
