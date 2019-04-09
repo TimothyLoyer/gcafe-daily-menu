@@ -14,11 +14,12 @@ $menu = implode("\n", $menu);
 
 $data = [
 	"response_type" => "in_channel",
-	"text" => "*$title*",
-	"attachments" => [
+	"text" => "*{$title}*",
+	"attachments" => [[
 		"text" => $menu,
-		"footer" => "$hostname/$link",
-	],
+		"footer" => $link,
+		"footer_icon" => "{$hostname}/gcafe.png",
+	]],
 ];
 
 header("Content-Type: application/json;charset=utf-8");
