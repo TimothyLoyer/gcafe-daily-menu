@@ -14,7 +14,7 @@ $menu = implode("\n", $menu);
 
 $data = [
 	"response_type" => "in_channel",
-	"text" => "*{$title}*",
+	"text" => $title,
 	"attachments" => [[
 		"text" => $menu,
 		"footer" => $link,
