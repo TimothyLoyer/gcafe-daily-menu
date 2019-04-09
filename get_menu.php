@@ -1,11 +1,23 @@
 <?php
 
 chdir(__DIR__);
-$menu_output = shell_exec("./gcafe");
+$menu = shell_exec("./gcafe");
+
+$menu = explode($menu, "\n")
+$menu = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $menu);
+
+$menu = explode("\n", $menu);
+$title = array_shift($menu);
+$link = array_pop($menu);
+$menu = implode("\n", $menu);
 
 $data = [
 	"response_type" => "in_channel",
-	"text" => $menu_output,
+	"text" => "*$title*",
+	"attachments" => [
+		"text" => $menu,
+		"footer" => gethostname()."/$link",
+	],
 ];
 
 header("Content-Type: application/json;charset=utf-8");
