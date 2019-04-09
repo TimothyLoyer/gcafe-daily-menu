@@ -4,9 +4,8 @@ chdir(__DIR__);
 $hostname = getenv("APP_URL");
 $menu = shell_exec("./gcafe");
 
-$menu = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $menu);
+$menu = array_filter(explode("\n", $menu));
 
-$menu = explode("\n", $menu);
 $title = array_shift($menu);
 $link = array_pop($menu);
 $menu = implode("\n", $menu);
