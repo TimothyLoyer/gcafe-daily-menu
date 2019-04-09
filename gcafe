@@ -55,10 +55,14 @@ day=$(date +%A)
 day_menu="tmp/${day,,}.txt"
 
 if [ -f $day_menu ]; then
-    menu=$(<$day_menu)
-    printf "${day^} Menu\n\`\`\`\n${menu}\`\`\`"
+    menu=$(sed 's/\o14//g' $day_menu)
+
+    printf "${day^} Menu\n"
+    printf '```\n'
+    printf "${menu}\n"
+    printf '```\n'
 else
-    printf "${day^} menu is not available yet! Please check back in a little while.\n\n"
+    printf '${day^} menu is not available yet! Please check back in a little while.\n'
 fi
 
-printf "\nFor full menu, visit https://flikcafes.compass-usa.com/cafeG/Pages/Menu.aspx?lid=bnb\n"
+printf 'For full menu, visit https://flikcafes.compass-usa.com/cafeG/Pages/Menu.aspx?lid=bnb'
