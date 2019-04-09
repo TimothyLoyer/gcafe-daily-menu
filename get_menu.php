@@ -4,8 +4,7 @@ chdir(__DIR__);
 $hostname = getenv("APP_URL");
 $menu = shell_exec("./gcafe");
 
-$menu = explode($menu, "\n");
-$menu = $debug = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $menu);
+$menu = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $menu);
 
 $menu = explode("\n", $menu);
 $title = array_shift($menu);
@@ -15,7 +14,6 @@ $menu = implode("\n", $menu);
 $data = [
 	"response_type" => "in_channel",
 	"text" => $title,
-	"debug" => $debug,
 	"attachments" => [[
 		"text" => $menu,
 		"footer" => $link,
