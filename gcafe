@@ -16,9 +16,9 @@ menu_pdf="tmp/menu-${month}-${day}.pdf"
 
 function get_menu {
     # GCafe menu url template
-    url="https://flikcafes.compass-usa.com/cafeG/DiningMenus/Menu%20{month}%20{day}.pdf"
+    url="https://flikcafes.compass-usa.com/cafeG/DiningMenus/Menu%20Apil%20{day}nd.2.pdf"
 
-    menu=$(echo "$url" | sed -E -e "s/\{month\}/${month}/g" -e "s/\{day\}/${day}/g")
+    menu=$(echo "$url" | sed -E -e "s/\{day\}/${day}/g")
     curl -sf "$menu" -o "$menu_pdf" || exit 1
 }
 
